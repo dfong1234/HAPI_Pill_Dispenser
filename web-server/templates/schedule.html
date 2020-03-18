@@ -1,0 +1,45 @@
+
+
+<!DOCTYPE html>
+<head>
+   <title>HAPI Web Interface</title>
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+   <!-- Optional theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<h1>HAPI Schedule</h1>
+	{% for pill in pills %}
+		<h2>{{ pills[pill].name }}
+		{% if pills[pill].time != "ERROR" %}
+			will be dispensed at <strong>{{ pills[pill].time }}</strong></h2>
+			<div class="row"><div class="col-md-2">
+			<a href="/{{pill}}/off" class="btn btn-block btn-lg btn-default" role="button">Turn off</a></div></div>
+		{% else %}
+			WHAT JUST HAPPENED <strong>LMAO</strong></h2><div class="row"><div class="col-md-2">
+			<a href="/{{pill}}/on" class="btn btn-block btn-lg btn-primary" role="button">Turn on</a></div></div>
+		{% endif %}
+		<div class="row"><div class="col-md-2">
+            
+		<form action="/{{pill}}/change" method="POST">
+            <!-- <input type="hidden" name="pill" value="{{pill}}"> -->
+			<label for="name1">Pill Name:</label>
+			<input type="text" id="name1" name="pillname" /input><br>
+			<label for="sel1">Time to Dispense:</label>
+			<input type="text" id="sel1" name="time"></input>
+			<label for="sel2">Current Amount:</label>
+			<input type="text" id="sel2" name="level"></input>
+			<button class="btn btn-danger" id="submit" type="submit" value="Submit">Submit</button><br>
+		</form>
+            </div></div>
+	{% endfor %}
+	<br>
+	<div class="row"><div class="col-md-2">
+	<a href="/" class="btn btn-block btn-lg btn-default" role="button">Main Menu</a></div></div>
+</body>
+</html>
+
